@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Doctor Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+<h2>Doctor</h2>
+<a href="#">Appointments</a>
+<a href="#">Patients</a>
+<a href="#">Notifications</a>
+</div>
+
+<div class="main">
+
+<h1>Doctor Dashboard</h1>
+
+<div class="card-grid">
+
+{% for a in appointments %}
+<div class="card">
+<h3>{{ a.patient }}</h3>
+<p>Doctor: {{ a.doctor }}</p>
+<p>Date: {{ a.appointment_date }}</p>
+<p>Status: {{ a.status }}</p>
+</div>
+{% endfor %}
+
+</div>
+
+</div>
+
+</body>
+</html>

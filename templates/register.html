@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="main">
+<div class="card" style="max-width:600px;margin:auto;">
+
+<h1>Register</h1>
+
+<form action="/register-user" method="POST">
+<input type="text" name="fullname" placeholder="Full Name">
+<input type="email" name="email" placeholder="Email">
+<input type="password" name="password" placeholder="Password">
+
+<select name="role">
+<option value="patient">Patient</option>
+<option value="doctor">Doctor</option>
+<option value="admin">Admin</option>
+</select>
+
+<select name="department">
+<option>General</option>
+<option>Cardiology</option>
+<option>Surgery</option>
+<option>Pediatrics</option>
+</select>
+
+<button class="btn">Create Account</button>
+</form>
+
+</div>
+</div>
+
+</body>
+</html>

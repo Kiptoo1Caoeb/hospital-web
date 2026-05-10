@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Patient Dashboard</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <h2>Patient Panel</h2>
+
+        <a href="#">Dashboard</a>
+        <a href="#">Appointments</a>
+        <a href="#">Payments</a>
+        <a href="#">Medical Records</a>
+        <a href="/logout">Logout</a>
+
+    </div>
+
+    <div class="main">
+
+        <h1>Patient Dashboard</h1>
+
+        <!-- SUCCESS MESSAGES -->
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+        {% for message in messages %}
+
+        <div class="success-box">
+            {{ message }}
+        </div>
+
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <!-- APPOINTMENT FORM -->
+
+        <div class="card">
+
+            <h2>Book Appointment</h2>
+
+            <form action="/book-appointment" method="POST">
+
+                <input type="text"
+                    name="patient"
+                    placeholder="Patient Name"
+                    required>
+
+                <input type="text"
+                    name="doctor"
+                    placeholder="Doctor Name"
+                    required>
+
+                <input type="datetime-local"
+                    name="appointment_date"
+                    required>
+
+                <button class="btn">
+                    Book Appointment
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- APPOINTMENT LIST -->
+
+        <h2 style="margin-top:40px;">
+            Appointment List
+        </h2>
+
+        <div class="card-grid">
+
+            {% for appointment in appointments %}
+
+            <div class="card appointment-card">
+
+                <h3>{{ appointment.patient }}</h3>
+
+                <p>
+                    Doctor:
+                    {{ appointment.doctor }}
+                </p>
+
+                <p>
+                    Status:
+                    <span class="status">
+                        {{ appointment.status }}
+                    </span>
+                </p>
+
+                <p>
+                    Appointment Time:
+                </p>
+
+                <strong class="appointment-date">
+                    {{ appointment.appointment_date }}
+                </strong>
+
+                <div class="countdown"
+                    data-date="{{ appointment.appointment_date }}">
+                    Loading countdown...
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- REAL TIME COUNTDOWN -->
+
+    <script>
+
+        function updateCountdowns() {
+
+            const countdowns =
+                document.querySelectorAll('.countdown');
+
+            countdowns.forEach(countdown => {
+
+                const appointmentDate =
+                    new Date(
+                        countdown.dataset.date
+                    ).getTime();
+
+                const now = new Date().getTime();
+
+                const distance =
+                    appointmentDate - now;
+
+                if (distance <= 0) {
+
+                    countdown.innerHTML =
+                        "Appointment Time Reached";
+
+                    return;
+                }
+
+                const days =
+                    Math.floor(
+                        distance / (1000 * 60 * 60 * 24)
+                    );
+
+                const hours =
+                    Math.floor(
+                        (distance % (1000 * 60 * 60 * 24))
+                        /
+                        (1000 * 60 * 60)
+                    );
+
+                const minutes =
+                    Math.floor(
+                        (distance % (1000 * 60 * 60))
+                        /
+                        (1000 * 60)
+                    );
+
+                const seconds =
+                    Math.floor(
+                        (distance % (1000 * 60))
+                        /
+                        1000
+                    );
+
+                countdown.innerHTML =
+                    `
+                    <strong>
+                    Countdown:
+                    </strong>
+                    ${days}d
+                    ${hours}h
+                    ${minutes}m
+                    ${seconds}s
+                    `;
+            });
+        }
+
+        setInterval(updateCountdowns, 1000);
+
+        updateCountdowns();
+
+    </script>
+
+</body>
+
+</html>

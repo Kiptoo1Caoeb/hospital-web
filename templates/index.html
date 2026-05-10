@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Advanced HCI Hospital System</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body onload="speakWelcome()">
+
+<div class="hero">
+<div>
+<h1>Smart Hospital Management System</h1>
+<p>Advanced HCI focused hospital platform with accessibility, AI support, dashboards, scheduling and live interaction.</p>
+
+<a class="btn" href="/login">Login</a>
+<a class="btn" href="/register">Register</a>
+<button class="btn" onclick="toggleDarkMode()">Dark Mode</button>
+<button class="btn" onclick="startRecognition()">Voice Assistant</button>
+</div>
+
+<div class="card">
+<h2>Features</h2>
+<p>✔ Real Authentication</p>
+<p>✔ Appointment Scheduling</p>
+<p>✔ AI Chat Support</p>
+<p>✔ Calendar System</p>
+<p>✔ Notifications</p>
+<p>✔ Medical Uploads</p>
+</div>
+</div>
+
+<div class="chatbot" onclick="openChat()">💬</div>
+
+<div class="chat-window" id="chat">
+<h3>AI Assistant</h3>
+<p>Hello, how can I help you today?</p>
+<input type="text" placeholder="Ask something...">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+<h2>Admin</h2>
+<a href="#">Users</a>
+<a href="#">Appointments</a>
+<a href="#">Reports</a>
+</div>
+
+<div class="main">
+
+<h1>Admin Dashboard</h1>
+
+<div class="card-grid">
+
+<div class="card">
+<h2>Total Users</h2>
+<p>{{ users|length }}</p>
+</div>
+
+<div class="card">
+<h2>Total Appointments</h2>
+<p>{{ appointments|length }}</p>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
